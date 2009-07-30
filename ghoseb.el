@@ -1,5 +1,5 @@
 ;;; ghoseb.el -- My customisations
-;;; Time-stamp: "2009-07-30 05:30:29 ghoseb"
+;;; Time-stamp: "2009-07-30 05:49:01 ghoseb"
 
 (require 'cl)
 
@@ -63,6 +63,10 @@
 (add-hook 'before-save-hook 'time-stamp)
 
 ;; ESK specific
+(defun turn-on-highlight-parens-mode ()
+  (highlight-parentheses-mode 1))
+
+(add-hook 'coding-hook 'turn-on-highlight-parens-mode)
 (remove-hook 'coding-hook 'turn-on-hl-line-mode)
 (remove-hook 'clojure-mode-hook 'idle-highlight)
 (remove-hook 'emacs-lisp-mode-hook 'idle-highlight)
