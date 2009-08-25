@@ -1,5 +1,5 @@
 ;;; ghoseb.el -- My customisations
-;;; Time-stamp: "2009-07-30 05:49:01 ghoseb"
+;;; Time-stamp: "2009-08-09 16:39:32 ghoseb"
 
 (require 'cl)
 
@@ -107,6 +107,13 @@
 ;;; ------------------------
 ;;; Useful utility functions
 ;;; ------------------------
+
+(defun full-screen-toggle ()
+  "toggle full-screen mode"
+  (interactive)
+  (shell-command "wmctrl -r :ACTIVE: -btoggle,fullscreen"))
+
+(global-set-key (kbd "<f11>") 'full-screen-toggle)
 
 (defun revert-all-buffers()
   "Refresh all open buffers from their respective files"
