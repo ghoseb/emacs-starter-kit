@@ -1,5 +1,5 @@
 ;;; ghoseb.el -- My customisations
-;;; Time-stamp: "2009-08-09 16:39:32 ghoseb"
+;;; Time-stamp: "2009-08-26 17:02:00 ghoseb"
 
 (require 'cl)
 
@@ -9,6 +9,12 @@
 (set-scroll-bar-mode 'nil)
 (show-paren-mode 1)
 (savehist-mode 1)
+
+;; ------------
+;; General Info
+;; ------------
+(setq user-full-name "Baishampayan Ghose")
+(setq user-mail-address "bg@infinitelybeta.com")
 
 ;; ----------------------
 ;; Final newline handling
