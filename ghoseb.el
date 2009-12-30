@@ -1,5 +1,5 @@
 ;;; ghoseb.el -- My customisations
-;;; Time-stamp: "2009-08-26 17:02:00 ghoseb"
+;;; Time-stamp: "2009-12-26 13:09:50 ghoseb"
 
 (require 'cl)
 
@@ -43,7 +43,8 @@
 ;; -------------
 ;; Custom colors
 ;; -------------
-(set-default-font "Droid Sans Mono-9")
+;(set-default-font "Droid Sans Mono-9")
+(set-default-font "Anonymous Pro-9")
 (require 'color-theme-g0sub)
 (color-theme-g0sub)
 
@@ -83,6 +84,20 @@
 (require 'template)
 (template-initialize)
 
+
+;;; Rudel
+(defun load-rudel ()
+  (interactive)
+  (add-to-list 'load-path "~/src/cedet/eieio")
+  (add-to-list 'load-path "~/src/cedet/common")
+  (add-to-list 'load-path "~/src/rudel/")
+  (add-to-list 'load-path "~/src/rudel/jupiter")
+  (add-to-list 'load-path "~/src/rudel/obby")
+  (require 'rudel-mode)
+  (require 'rudel-obby)
+  (global-rudel-minor-mode))
+
+
 ;; ----------
 ;; Multi Term
 ;; ----------
@@ -109,6 +124,41 @@
   "Starts Clojure in Slime"
   (interactive)
   (slime 'clojure))
+
+(eval-after-load "slime"
+  '(progn
+    (setq slime-complete-symbol*-fancy t)
+    (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)))
+
+
+;;; ------
+;;; Erlang
+;;; ------
+(let ((distel-dir "/home/ghoseb/opt/distel/elisp"))
+  (unless (member distel-dir load-path)
+    (setq load-path (append load-path (list distel-dir)))))
+
+(require 'distel)
+(distel-setup)
+
+(add-hook 'erlang-mode-hook
+          (lambda ()
+            ;; when starting an Erlang shell in Emacs, default in the node name
+            (setq inferior-erlang-machine-options '("-sname" "emacs"))))
+
+(defconst distel-shell-keys
+  '(("\C-\M-i"   erl-complete)
+    ("\M-?"      erl-complete)	
+    ("\M-."      erl-find-source-under-point)
+    ("\M-,"      erl-find-source-unwind) 
+    ("\M-*"      erl-find-source-unwind))
+  "Additional keys to bind when in Erlang shell.")
+
+(add-hook 'erlang-shell-mode-hook
+          (lambda ()
+            ;; add some Distel bindings to the Erlang shell
+            (dolist (spec distel-shell-keys)
+              (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 
 ;;; ------------------------
 ;;; Useful utility functions
