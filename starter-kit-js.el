@@ -2,11 +2,11 @@
 ;;
 ;; Part of the Emacs Starter Kit
 
-(font-lock-add-keywords
- 'espresso-mode `(("\\(function *\\)("
-                   (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                             "ƒ")
-                             nil)))))
+;; (font-lock-add-keywords
+;;  'espresso-mode `(("\\(function *\\)("
+;;                    (0 (progn (compose-region (match-beginning 1) (match-end 1)
+;;                                              "ƒ")
+;;                              nil)))))
 
 (font-lock-add-keywords 'espresso-mode
                         '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
